@@ -2178,6 +2178,9 @@ plupload.File = (function() {
 					, curChunkSize
 					;
 
+					// allow url to be updated on a per-chunk basis by defining the chunkURL method on an individual file object
+					if (typeof file.chunkURL==='function') url = file.chunkURL(file,Math.ceil(offset / chunkSize)) || url;
+
 					// send additional 'name' parameter only if required
 					if (options.send_file_name) {
 						data.name = file.target_name || file.name;
